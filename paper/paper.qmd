@@ -2,7 +2,7 @@
 title: "Predicting voter support: Analyzing polling dynamics for Kamala Harris in the upcoming U.S. election"
 subtitle: "Understanding the impact of polling variables on public opinion and campaign strategy"
 author: Xingjie Yao
-thanks: "Code and data are available at: [https://github.com/RohanAlexander/starter_folder](https://github.com/RohanAlexander/starter_folder)."
+thanks: "Code and data are available at: [https://github.com/Stella41603/2024-US-Election-Forecast.git)."
 date: today
 date-format: long
 abstract: "This study analyzes polling data to predict the percentage support for Kamala Harris in the upcoming U.S. election. By examining key factors such as the end date of the polls, the pollster, the state, and the poll score, we identify significant predictors of voter sentiment. Our findings reveal that support for Harris increases as the election approaches and varies by pollster and state, highlighting the complexities of public opinion. Understanding these dynamics is crucial for effective campaign strategies and provides valuable insights into how polling influences voter behavior in the electoral process."
@@ -70,7 +70,7 @@ analysis_data <- read_parquet(here::here("data/02-analysis_data/analysis_data.pa
 # Plot distribution of percentage support for Harris
 ggplot(analysis_data, aes(x = pct)) +
   geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
-  labs(x = "Percentage Support (pct)",
+  labs(x = "Percentage support",
        y = "Frequency") +
   theme_minimal()
 ```
@@ -94,7 +94,7 @@ The pollster refers to the polling organization or source that conducted the pol
 ggplot(analysis_data, aes(x = reorder(pollster, -table(pollster)[pollster]))) +
   geom_bar(fill = "skyblue", color = "black") +
   labs(x = "Pollster",
-       y = "Number of Polls") +
+       y = "Number of polls") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
@@ -116,7 +116,7 @@ The state variable represents the geographic region where the poll was conducted
 ggplot(analysis_data, aes(x = reorder(state, -table(state)[state]))) +
   geom_bar(fill = "skyblue", color = "black") +
   labs(x = "State",
-       y = "Number of Polls") +
+       y = "Number of polls") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
@@ -141,7 +141,7 @@ The poll score is a numerical rating that reflects the overall quality or reliab
 # Plot distribution of poll score
 ggplot(analysis_data, aes(x = pollscore)) +
   geom_histogram(binwidth = 0.15, fill = "skyblue", color = "black") +
-  labs(x = "Poll Score",
+  labs(x = "Poll score",
        y = "Frequency") +
   theme_minimal()
 ```
@@ -169,7 +169,7 @@ Key observations:
 ggplot(analysis_data, aes(x = reorder(state, pct), y = pct)) +
   geom_boxplot(fill = "lightblue") +
   labs(x = "State",
-       y = "Percentage Support") +
+       y = "Percentage support") +
   theme_minimal() +
   coord_flip()  
 ```
@@ -188,7 +188,7 @@ ggplot(analysis_data, aes(x = pollscore, y = pct)) +
   geom_point(color = "lightblue") +
   geom_smooth(method = "lm", se = FALSE, color = "red") +
   labs(x = "Poll Score",
-       y = "Percentage Support (pct)") +
+       y = "Percentage support (pct)") +
   theme_minimal()
 ```
 
@@ -201,8 +201,6 @@ The modeling decisions align with the data section by treating end date as conti
 ## Model set-up
 
 ### Model 1: Percentage support as a function of end date
-
-Define $y_i$ as the percentage support for the candidate in the poll. Let $x_1$ represent the end date of the poll.
 
 $$
 \begin{aligned}
@@ -339,8 +337,8 @@ The linear regression model assumes a linear relationship between these predicto
 #| message: false
 #| warning: false
 #| label: fig-diagnostics
-#| fig-cap: "Checking the convergence of the MCMC algorithm"
-#| fig-subcap: ["Residuals vs. fitted values", "Normal Q-Q plot of residual"]
+#| fig-cap: "Assessing model assumptions, Model 2"
+#| fig-subcap: ["Residuals vs. fitted values", "Normal Q-Q plot of residuals"]
 #| layout-ncol: 2
 
 model <- model_date_pollster

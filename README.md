@@ -1,8 +1,8 @@
-# Predicting Percentage Support for Harris in the Upcoming U.S. Election
+# Predicting Percentage Support for Kamala Harris in the Upcoming U.S. Election
 
 ## Overview
 
-This repository serves as a foundation for analyzing polling data related to a project on predicting percentage support for Harris in the upcoming U.S. election in November 2024. While not every aspect will be necessary for every analysis, you should feel free to modify or remove components that are not relevant to your specific project.
+This repository serves as a foundation for analyzing polling data related to a project on predicting percentage support for Kamala Harris in the upcoming U.S. election in November 2024. While not every aspect will be necessary for every analysis, you should feel free to modify or remove components that are not relevant to your specific project.
 
 ## File Structure
 
