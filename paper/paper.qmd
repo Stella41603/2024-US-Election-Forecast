@@ -1,11 +1,11 @@
 ---
-title: "Predicting voter support: Analyzing polling dynamics for Kamala Harris in the upcoming U.S. election"
-subtitle: "Understanding the impact of polling variables on public opinion and campaign strategy"
+title: "Predicting voter support: Analyzing polling dynamics for Kamala Harris in the 2024 U.S. election"
+subtitle: "Support for Kamala Harris predicted to rise as Election Day nears, with notable differences across states and pollsters"
 author: Xingjie Yao
-thanks: "Code and data are available at: [https://github.com/Stella41603/2024-US-Election-Forecast.git)."
+thanks: "Code and data are available at: [https://github.com/Stella41603/2024-US-Election-Forecast.git]."
 date: today
 date-format: long
-abstract: "This study analyzes polling data to predict the percentage support for Kamala Harris in the upcoming U.S. election. By examining key factors such as the end date of the polls, the pollster, the state, and the poll score, we identify significant predictors of voter sentiment. Our findings reveal that support for Harris increases as the election approaches and varies by pollster and state, highlighting the complexities of public opinion. Understanding these dynamics is crucial for effective campaign strategies and provides valuable insights into how polling influences voter behavior in the electoral process."
+abstract: "This study analyzes polling data to predict Kamala Harris's percentage support in the upcoming U.S. election. Key predictors of voter sentiment include poll end date, pollster, state, and poll score. Our findings show that Harris's support tends to increase closer to Election Day and varies significantly by pollster and state. These insights are essential for shaping campaign strategies and understanding the role of polling in influencing voter behavior."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -30,7 +30,7 @@ The primary estimand of our analysis is the percentage support for Harris, which
 
 The results of our analysis indicate a significant positive relationship between the end date and percentage support, suggesting that support increases as the election draws nearer. Additionally, we found substantial variability in support based on the pollster and state, with certain pollsters consistently reporting higher levels of support for Harris. The poll score also played a crucial role, as higher-quality polls were associated with increased percentage support. These findings underscore the importance of understanding both the temporal dynamics of polling and the characteristics of different polling organizations when interpreting public sentiment.
 
-This research matters because accurate predictions of voter support are essential for effective campaign strategies. By identifying the key factors that influence support for Harris, political teams can tailor their outreach efforts and messaging to resonate more effectively with voters. Moreover, understanding the variability across different pollsters and states can guide resource allocation and focus during the campaign. As elections are determined by small margins, having reliable insights into voter preferences can make a significant difference in the final outcomes.
+Accurate predictions of voter support are essential for effective campaign strategies. By identifying the key factors that influence support for Harris, political teams can tailor their outreach efforts and messaging to resonate more effectively with voters. Moreover, understanding the variability across different pollsters and states can guide resource allocation and focus during the campaign. As elections are determined by small margins, having reliable insights into voter preferences can make a significant difference in the final outcomes.
 
 The remainder of this paper is structured as follows. In @sec-data, we detail the data sources and variables used in our analysis. @sec-model outlines the modeling approach, including the assumptions and specifications of the linear regression framework. In @sec-results, we present the findings of our models, highlighting the key predictors of percentage support for Harris. Finally, in @sec-discussion, we discuss the implications of our results and potential avenues for future research.
 
@@ -38,9 +38,9 @@ The remainder of this paper is structured as follows. In @sec-data, we detail th
 
 ## Overview
 
-We use the statistical programming language R [@citeR] to conduct our analysis of polling data. Our data, sourced from FiveThirtyEight [@fivethirtyeight2024], provides a comprehensive view of public opinion leading up to the election. Following the guidelines established in @tellingstories, we consider various factors that influence percentage support, such as the timing of the polls, the characteristics of the polling organizations, and regional variations.
+We use the statistical programming language `R` to conduct our analysis of polling data. Our data, sourced from FiveThirtyEight [@citeR; @fivethirtyeight2024], provides a comprehensive view of public opinion leading up to the election. Following the guidelines established in @tellingstories, we consider various factors that influence percentage support, such as the timing of the polls, the characteristics of the polling organizations, and regional variations.
 
-In this analysis, several R packages were utilized to enhance data manipulation, modeling, and visualization. The tidyverse package provided a cohesive framework for data wrangling and analysis, streamlining workflows (@thereferencecanbewhatever). The here package simplified file path management, ensuring easy access to data files (@citehere). Janitor was essential for cleaning the dataset, offering tools to identify and rectify data quality issues (@citejanitor). The lubridate package facilitated date manipulation, making it simpler to work with time-related variables (@citelubridate). Lastly, arrow enabled efficient reading and writing of data in a performant format, which is crucial for handling larger datasets (@citearrow). Coding and file structure were adopted from @tellingstories.
+In this analysis, several `R` packages were utilized to enhance data manipulation, modeling, and visualization. The `tidyverse` package provided a cohesive framework for data wrangling and analysis, streamlining workflows [@thereferencecanbewhatever]. The `here` package simplified file path management, ensuring easy access to data files [@citehere]. `Janitor` was essential for cleaning the dataset, offering tools to identify and rectify data quality issues [@citejanitor]. The `lubridate` package facilitated date manipulation, making it simpler to work with time-related variables [@citelubridate]. We used `testthat` to test the simulated and the analysis datasets [@citetestthat]. Lastly, `arrow` enabled efficient reading and writing of data in a performant format, which is crucial for handling larger datasets [@citearrow]. Coding and file structure were adopted from @tellingstories.
 
 ## Measurement
 	
@@ -60,7 +60,7 @@ The percentage support for Harris in a poll indicates the proportion of responde
 
 ```{r}
 #| label: fig-pct
-#| fig-cap: Distribution of percentage support for Harris
+#| fig-cap:  Percentage support for Kamala Harris in the 2024 U.S. election, showing a central peak around 50% with most values between 40% and 55%. The distribution indicates moderate support with few polls showing support below 40% or above 60%.
 #| echo: false
 #| warning: false
 #| message: false
@@ -85,7 +85,7 @@ The pollster refers to the polling organization or source that conducted the pol
 
 ```{r}
 #| label: fig-pollster
-#| fig-cap: Number of polls by pollster
+#| fig-cap: Showing the number of polls conducted by each pollster. Siena/NYT conducted the most polls, followed by YouGov, Emerson, and Ipsos. This distribution highlights the varying levels of polling activity across different organizations.
 #| echo: false
 #| warning: false
 #| message: false
@@ -107,7 +107,7 @@ The state variable represents the geographic region where the poll was conducted
 
 ```{r}
 #| label: fig-state
-#| fig-cap: Number of polls by state
+#| fig-cap: Number of polls conducted per state, with a large number focused on national polling. Pennsylvania, Wisconsin, North Carolina, and Arizona are among the states with the highest polling frequency, reflecting their importance as swing states in the election. Fewer polls were conducted in other states, indicating lower polling focus in those areas.
 #| echo: false
 #| warning: false
 #| message: false
@@ -133,7 +133,7 @@ The poll score is a numerical rating that reflects the overall quality or reliab
 
 ```{r}
 #| label: fig-pollscore
-#| fig-cap: Distribution of poll scores
+#| fig-cap: The distribution of poll scores across various ranges. The majority of poll scores are concentrated around -1.2, with fewer polls in the higher and lower score ranges. 
 #| echo: false
 #| warning: false
 #| message: false
@@ -160,7 +160,7 @@ Key observations:
 
 ```{r}
 #| label: fig-pctstate
-#| fig-cap: Percentage support for Harris by state
+#| fig-cap: Percentage support for Kamala Harris by state. The distribution of support varies significantly across states, with some states like Nebraska showing lower median support, while others like Maryland and Massachusetts display higher levels. 
 #| echo: false
 #| warning: false
 #| message: false
@@ -178,7 +178,7 @@ ggplot(analysis_data, aes(x = reorder(state, pct), y = pct)) +
 
 ```{r}
 #| label: fig-pctpollscore
-#| fig-cap: Relationship between Percentage Support and Poll Score
+#| fig-cap: Percentage support for Kamala Harris versus poll score, with a fitted trend line. The positive slope of the trend line suggests a slight increase in support as poll scores improve, though slightly.
 #| echo: false
 #| warning: false
 #| message: false
